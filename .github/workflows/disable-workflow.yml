@@ -1,0 +1,26 @@
+name: disable workflow test
+
+on:
+  schedule:
+    # UTC の 06:00 は JST だと 15:00 。
+    - cron: '0 5 1 * *'
+  workflow_dispatch:
+
+concurrency:
+  group: disable-workflow
+  cancel-in-progress: false
+
+jobs:
+
+  disable-workflow:
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: disable-workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh workflow disable github-actions-demo.yml
