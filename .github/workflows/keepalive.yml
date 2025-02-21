@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # ワークフローが自動的に無効になるのを防ぐ
+      # ワークフローが自動的に（60日間で）無効になるのを防ぐ
+      # ワークフローが既に有効の場合でも、期限が延長される
       - name: Re-enable workflow
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
