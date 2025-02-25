@@ -1,4 +1,4 @@
-name: GitHub API Keepalive Workflow
+name: Keepalive Workflow
 
 on:
   schedule:
@@ -17,9 +17,8 @@ jobs:
       actions: write
     runs-on: ubuntu-latest
     steps:
-
-      # ワークフローが自動的に（60日間で）無効になるのを防ぐ
-      # ワークフローが既に有効の場合でも、期限が延長される
+      # ワークフローが自動的に（60日間で）無効になるのを防ぐため、定期的に有効化にする
+      # 既に有効の場合でも、無効になるまでの期限が延長される
       - name: Re-enable workflow
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
